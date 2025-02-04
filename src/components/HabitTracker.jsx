@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
-const Calendar = () => {
+const HabitTracker = () => {
   const [currentDate, setCurrentDate] = useState(new Date());
 
   // Get the current month name and year
@@ -108,4 +108,4 @@ const DayCell = styled.div`
   }
 `;
 
-export default Calendar;
+export default HabitTracker;
