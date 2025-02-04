@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 // import Dashboard from './Dashboard';
-// import furinaimage from '../items/raiden2.jpg'
+import furinaimage from '../items/raiden2.jpg'
 
 const Pomodoro = () => {
   const [isRunning, setIsRunning] = useState(false); 
@@ -69,7 +69,7 @@ const Pomodoro = () => {
     <StyledWrapper>
       <div className="card">
         <div className="card-inner">
-          {/* <img className="background-image" src={furinaimage} alt="Background" /> */}
+          <img className="background-image" src={furinaimage} alt="Background" />
 
           <div className="timer">
             <div className="time">{formatTime(timeLeft)}</div>
@@ -141,7 +141,7 @@ const StyledWrapper = styled.div`
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
+    height: 40.5m;
     object-fit: cover;
     // opacity: 0.9; 
     z-index: -1; 
