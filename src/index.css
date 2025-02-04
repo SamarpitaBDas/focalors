@@ -1,0 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Keania+One&display=swap');
+
+body {
+  background-color: black;
+  margin: 0;
+  font-family: "Keania One", serif;
+  font-weight: 400;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
