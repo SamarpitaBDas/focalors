@@ -22,5 +22,9 @@
 .Navigation, .Pomodoro {
   flex: 1; 
 }
+.dashboard{
+  margin-top: -18em;
+  margin-left: 31em;
+}
 
 

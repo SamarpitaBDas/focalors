@@ -1,7 +1,8 @@
-  import './App.css';
-  import Navigation from './components/Navigation';
-  import Pomodoro from './components/Pomodoro';
-  import Todo from './components/Todo';
+import './App.css';
+import Dashboard from './components/Dashboard';
+import Navigation from './components/Navigation';
+import Pomodoro from './components/Pomodoro'
+import Todo from './components/Todo';
 
   function App() {
     return (
@@ -10,6 +11,9 @@
           <Navigation />
           <Pomodoro />
           <Todo/>
+        </div>
+        <div className='dashboard'>
+          <Dashboard/>
         </div>
       </div>
     );

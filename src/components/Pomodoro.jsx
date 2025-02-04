@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
+// import Dashboard from './Dashboard';
+// import furinaimage from '../items/raiden2.jpg'
 
 const Pomodoro = () => {
   const [isRunning, setIsRunning] = useState(false); 
@@ -67,8 +69,9 @@ const Pomodoro = () => {
     <StyledWrapper>
       <div className="card">
         <div className="card-inner">
+          {/* <img className="background-image" src={furinaimage} alt="Background" /> */}
+
           <div className="timer">
-            {/* <span>{isBreakTime ? "Break Time" : "Pomodoro Time"}</span> */}
             <div className="time">{formatTime(timeLeft)}</div>
           </div>
 
@@ -91,7 +94,6 @@ const Pomodoro = () => {
     </StyledWrapper>
   );
 };
-
 const StyledWrapper = styled.div`
   display: flex;
   justify-content: center;
@@ -107,7 +109,6 @@ const StyledWrapper = styled.div`
     background-color: rgba(255, 255, 255, 0.15);
     --r: 105px;
     --s: 220px;
-
     --_m: /calc(2*var(--r)) calc(2*var(--r)) radial-gradient(#000 70%, #0000 72%) no-repeat;
     mask: right calc(var(--s) + var(--r)) top 0 var(--_m),
       right calc(var(--s) + var(--r)) var(--_m),
@@ -118,6 +119,7 @@ const StyledWrapper = styled.div`
     transform: scaleX(-1) scaleY(-1); /* Flip the card */
     transition: transform 1s ease-in-out;
     transform-style: preserve-3d; /* Ensure content inside isn't flipped */
+    position: relative; /* For the background image */
   }
 
   .card-inner {
@@ -127,8 +129,22 @@ const StyledWrapper = styled.div`
     height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between; /* Keeps the timer at the top */
+    margin-top: 2em;
     align-items: center;
+    position: relative;
+    z-index: 1; /* Ensure the content stays on top */
+  }
+
+  .background-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    // opacity: 0.9; 
+    z-index: -1; 
   }
 
   .timer {
@@ -136,20 +152,21 @@ const StyledWrapper = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-bottom: 2em;
+    z-index: 2; 
+  }
 
-    span {
-      font-weight: bold;
-      color: white;
-      font-size: 2em;
-    }
+  .time {
+    font-weight: bold;
+    color: white;
+    font-size: 10em;
+    margin-top: 0.5em;
+  }
 
-    .time {
-      font-weight: bold;
-      color: white;
-      font-size: 5em;
-      margin-top: 0.5em;
-    }
+  .controls {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-bottom: 19em; 
   }
 
   .controls button {
@@ -169,5 +186,7 @@ const StyledWrapper = styled.div`
     cursor: pointer;
   }
 `;
+
+
 
 export default Pomodoro;
