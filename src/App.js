@@ -3,6 +3,8 @@ import Dashboard from './components/Dashboard';
 import Navigation from './components/Navigation';
 import Pomodoro from './components/Pomodoro'
 import Todo from './components/Todo';
+import MoodTracker from './components/MoodTracker'
+import Calender from './components/Calender'
 
   function App() {
     return (
@@ -10,7 +12,11 @@ import Todo from './components/Todo';
         <div className="horizontal-layout">
           <Navigation />
           <Pomodoro />
-          <Todo/>
+          <div className='vertical-layout'>
+            <Todo/>
+            <MoodTracker/>
+            <Calender/>
+          </div>
         </div>
         <div className='dashboard'>
           <Dashboard/>

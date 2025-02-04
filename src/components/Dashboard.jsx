@@ -1,5 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
+import styled, { createGlobalStyle } from 'styled-components';
+
+// Global styles for fonts
+const GlobalStyle = createGlobalStyle`
+  @import url('https://fonts.googleapis.com/css2?family=Grey+Qo&family=Keania+One&display=swap');
+`;
 
 const Dashboard = () => {
   const [currentDate, setCurrentDate] = useState(new Date());
@@ -14,22 +19,28 @@ const Dashboard = () => {
   }, []);
 
   // Get the month, date, and day
-  const month = currentDate.toLocaleString('default', { month: 'long' }); // Full month name
+  const month = currentDate.toLocaleString('default', { month: 'short' }); // Short month name (e.g., 'Feb')
   const date = currentDate.getDate(); // Day of the month
   const day = currentDate.toLocaleString('default', { weekday: 'long' }); // Full weekday name
 
   return (
-    <StyledWrapper>
-      <div className="card">
-        <div className="content">
-          <DateContainer>
-            <Month>{month}</Month>
-            <DateText>{date}</DateText> 
-          </DateContainer>
-          <Day>{day}</Day>
+    <>
+      <GlobalStyle /> {/* Inject global styles for fonts */}
+      <StyledWrapper>
+        <div className="card">
+          <div className="content">
+            <Day>{day}</Day>
+            <DateContainer>
+              <Month>{month}</Month>
+              <DateText>{date}</DateText> 
+            </DateContainer>
+          </div>
+          <div className='statistics'>
+            
+          </div>
         </div>
-      </div>
-    </StyledWrapper>
+      </StyledWrapper>
+    </>
   );
 }
 
@@ -40,8 +51,8 @@ const StyledWrapper = styled.div`
     border-radius: 20px;
     background-color: rgba(255, 255, 255, 0.15);
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: flex-start; /* Align content to the left */
+    align-items: flex-start; /* Align content to the top */
     padding: 20px;
     mask: right calc(var(--s) + var(--r)) top 0 var(--_m),
       right calc(var(--s) + var(--r)) var(--_m),
@@ -54,32 +65,44 @@ const StyledWrapper = styled.div`
 
   .content {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
+    flex-direction: column; /* Stack the DateContainer and Day vertically */
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: auto; /* Let the content take its natural width */
+    margin-top: 50px;
   }
 `;
 
 const DateContainer = styled.div`
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  flex-direction: row; /* Align the month and date in a row */
+  align-items: center; /* Vertically center month and date */
 `;
 
 const Month = styled.div`
-  font-size: 2em;
+  font-size: 2.5em;
   font-weight: bold;
+  font-family: 'Keania One', cursive;
+  color: white;
+  margin-left: 10px;
 `;
 
 const DateText = styled.div`
-  font-size: 3em;
+  font-size: 2.5em;
   font-weight: bold;
+  font-family: 'Keania One', cursive; 
+  color: white;
+  margin-left: 0.5em; /* Add some space between month and date */
 `;
 
 const Day = styled.div`
-  font-size: 4em;
+  font-size: 3em;
   font-weight: bold;
-  text-align: center;
+  text-align: left; /* Align text to the left */
+  font-family: "Arizonia", serif;
+  font-weight: 400;
+  font-style: normal;
+  color: white;
 `;
 
 export default Dashboard;
