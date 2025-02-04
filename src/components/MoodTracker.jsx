@@ -1,11 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
+import Radio from './Radio'
 
 const MoodTracker = () => {
   return (
     <StyledWrapper>
       <div className="card">
-        
+        <Radio/>
       </div>
     </StyledWrapper>
   );
