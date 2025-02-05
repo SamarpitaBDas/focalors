@@ -6,10 +6,7 @@ import Todo from './components/Todo';
 import MoodTracker from './components/MoodTracker'
 import Calender from './components/Calender'
 import Profile from './components/Profile';
-<<<<<<< HEAD
 import HabitTracker from './components/HabitTracker';
-=======
->>>>>>> 492d05948d27feed438a7197e624382c70f443c0
 
   function App() {
     return (
