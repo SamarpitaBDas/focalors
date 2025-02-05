@@ -6,6 +6,7 @@ import Todo from './components/Todo';
 import MoodTracker from './components/MoodTracker'
 import Calender from './components/Calender'
 import Profile from './components/Profile';
+import HabitTracker from './components/HabitTracker';
 
   function App() {
     return (
@@ -24,6 +25,9 @@ import Profile from './components/Profile';
         </div>
         <div className='dashboard'>
           <Dashboard/>
+        </div>
+        <div className='habits'>
+          <HabitTracker/>
         </div>
       </div>
     );

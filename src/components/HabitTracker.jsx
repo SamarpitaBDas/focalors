@@ -1,59 +1,56 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 const HabitTracker = () => {
-  const [currentDate, setCurrentDate] = useState(new Date());
+  const [habits, setHabits] = useState([
+    { name: 'Exercise', daysCompleted: [] },
+    { name: 'Read', daysCompleted: [] },
+    { name: 'Drink Water', daysCompleted: [] }
+  ]);
 
-  // Get the current month name and year
-  const getMonthName = () => {
-    const options = { year: 'numeric', month: 'long' };
-    return currentDate.toLocaleDateString('en-US', options);
-  };
+  // Handle the completion of a habit for a particular day
+  const handleHabitCompletion = (habitIndex, day) => {
+    const updatedHabits = [...habits];
+    const habit = updatedHabits[habitIndex];
+    const dayIndex = habit.daysCompleted.indexOf(day);
 
-  // Get the number of days in the current month
-  const getDaysInMonth = () => {
-    const year = currentDate.getFullYear();
-    const month = currentDate.getMonth();
-    return new Date(year, month + 1, 0).getDate(); // Days in the current month
-  };
-
-  // Get the day of the week for the 1st of the current month
-  const getStartDayOfMonth = () => {
-    const year = currentDate.getFullYear();
-    const month = currentDate.getMonth();
-    return new Date(year, month, 1).getDay();
-  };
-
-  // Generate the calendar days for the current month
-  const generateCalendarDays = () => {
-    const daysInMonth = getDaysInMonth();
-    const startDay = getStartDayOfMonth();
-
-    const days = [];
-    // Add empty days before the start of the month
-    for (let i = 0; i < startDay; i++) {
-      days.push(null); // Empty spaces for days before the 1st
+    if (dayIndex === -1) {
+      habit.daysCompleted.push(day); // Add the day if it's not checked off yet
+    } else {
+      habit.daysCompleted.splice(dayIndex, 1); // Remove the day if it's unchecked
     }
 
-    // Add actual days of the month
-    for (let i = 1; i <= daysInMonth; i++) {
-      days.push(i);
-    }
+    setHabits(updatedHabits);
+  };
 
-    return days;
+  // Generate the 7 days for the week
+  const generateWeekDays = () => {
+    return Array.from({ length: 7 }, (_, index) => `Day ${index + 1}`);
   };
 
   return (
     <StyledWrapper>
       <div className="card">
-        <CalendarHeader>{getMonthName()}</CalendarHeader>
-        <CalendarGrid>
-          {generateCalendarDays().map((day, index) => (
-            <DayCell key={index}>
-              {day ? <span>{day}</span> : null}
-            </DayCell>
+        <CalendarHeader>Habit Tracker</CalendarHeader>
+
+        <HabitList>
+          {habits.map((habit, habitIndex) => (
+            <HabitRow key={habitIndex}>
+              <HabitName>{habit.name}</HabitName>
+              <HabitDays>
+                {generateWeekDays().map((day, dayIndex) => (
+                  <DayCell key={dayIndex}>
+                    <input
+                      type="checkbox"
+                      checked={habit.daysCompleted.includes(day)}
+                      onChange={() => handleHabitCompletion(habitIndex, day)}
+                    />
+                  </DayCell>
+                ))}
+              </HabitDays>
+            </HabitRow>
           ))}
-        </CalendarGrid>
+        </HabitList>
       </div>
     </StyledWrapper>
   );
@@ -61,8 +58,8 @@ const HabitTracker = () => {
 
 const StyledWrapper = styled.div`
   .card {
-    width: 17em;
-    height: 15em;
+    width: 20em;
+    height: 12em;
     background-color: rgba(255, 255, 255, 0.15);
     transition: 1s ease-in-out;
     border-radius: 20px;
@@ -79,28 +76,44 @@ const CalendarHeader = styled.h3`
   margin-bottom: 1em;
 `;
 
-const CalendarGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(7, 1fr); /* 7 columns for the days of the week */
+const HabitList = styled.div`
+  flex: 1;
+  overflow-y: auto;
+`;
+
+const HabitRow = styled.div`
+  display: flex;
+  align-items: center;
+  margin-bottom: 1em;
+`;
+
+const HabitName = styled.div`
+  flex: 1;
+  color: white;
+  font-size: 1em;
+  font-weight: bold;
+`;
+
+const HabitDays = styled.div`
+  display: flex;
   gap: 5px;
-  text-align: center;
 `;
 
 const DayCell = styled.div`
+  width: 25px;
+  height: 25px;
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   background-color: rgba(255, 255, 255, 0.2);
-  padding: 10px;
   border-radius: 5px;
-  color: white;
 
-  span {
-    font-size: 0.3em;
+  input[type='checkbox'] {
+    cursor: pointer;
   }
 
-  &:nth-child(7n) {
-    background-color: rgba(255, 255, 255, 0.3); /* Highlight Sundays */
+  input[type='checkbox']:checked {
+    background-color: rgba(0, 123, 255, 0.7);
   }
 
   &:hover {
