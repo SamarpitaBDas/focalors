@@ -8,22 +8,20 @@ const HabitTracker = () => {
     { name: 'Drink Water', daysCompleted: [] }
   ]);
 
-  // Handle the completion of a habit for a particular day
   const handleHabitCompletion = (habitIndex, day) => {
     const updatedHabits = [...habits];
     const habit = updatedHabits[habitIndex];
     const dayIndex = habit.daysCompleted.indexOf(day);
 
     if (dayIndex === -1) {
-      habit.daysCompleted.push(day); // Add the day if it's not checked off yet
+      habit.daysCompleted.push(day); 
     } else {
-      habit.daysCompleted.splice(dayIndex, 1); // Remove the day if it's unchecked
+      habit.daysCompleted.splice(dayIndex, 1); 
     }
 
     setHabits(updatedHabits);
   };
 
-  // Generate the 7 days for the week
   const generateWeekDays = () => {
     return Array.from({ length: 7 }, (_, index) => `Day ${index + 1}`);
   };
@@ -31,26 +29,27 @@ const HabitTracker = () => {
   return (
     <StyledWrapper>
       <div className="card">
-        <CalendarHeader>Habit Tracker</CalendarHeader>
-
-        <HabitList>
-          {habits.map((habit, habitIndex) => (
-            <HabitRow key={habitIndex}>
-              <HabitName>{habit.name}</HabitName>
-              <HabitDays>
-                {generateWeekDays().map((day, dayIndex) => (
-                  <DayCell key={dayIndex}>
-                    <input
-                      type="checkbox"
-                      checked={habit.daysCompleted.includes(day)}
-                      onChange={() => handleHabitCompletion(habitIndex, day)}
-                    />
-                  </DayCell>
-                ))}
-              </HabitDays>
-            </HabitRow>
-          ))}
-        </HabitList>
+        <div className="content">
+          <CalendarHeader>Habit Tracker</CalendarHeader>
+          <HabitList>
+            {habits.map((habit, habitIndex) => (
+              <HabitRow key={habitIndex}>
+                <HabitName>{habit.name}</HabitName>
+                <HabitDays>
+                  {generateWeekDays().map((day, dayIndex) => (
+                    <DayCell key={dayIndex}>
+                      <input
+                        type="checkbox"
+                        checked={habit.daysCompleted.includes(day)}
+                        onChange={() => handleHabitCompletion(habitIndex, day)}
+                      />
+                    </DayCell>
+                  ))}
+                </HabitDays>
+              </HabitRow>
+            ))}
+          </HabitList>
+        </div>
       </div>
     </StyledWrapper>
   );
@@ -58,15 +57,17 @@ const HabitTracker = () => {
 
 const StyledWrapper = styled.div`
   .card {
-    width: 20em;
-    height: 12em;
+    width: 19em;
+    height: 19em;
+    border-top-right-radius: 200px;
     background-color: rgba(255, 255, 255, 0.15);
-    transition: 1s ease-in-out;
-    border-radius: 20px;
     display: flex;
     flex-direction: column;
+    justify-content: flex-end;  
     padding: 1em;
     box-sizing: border-box;
+    margin-left:20px;
+    margin-top: 20px;
   }
 `;
 

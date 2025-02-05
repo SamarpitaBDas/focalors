@@ -30,5 +30,7 @@
   justify-content: space-evenly;
   gap:150px;
 }
-
-
+.habits{
+  margin-left: 6em;
+  margin-top: -20em;
+}
